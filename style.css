@@ -403,7 +403,7 @@ header.scrolled {
 /* Mobile Nav Overlay */
 @media (max-width: 768px) {
     nav {
-        display: none;
+        display: block;
     }
 
     .menu-toggle {
@@ -414,8 +414,8 @@ header.scrolled {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 80%;
-        height: 100vh;
+        width: 50%;
+        height: 50vh;
         background: var(--secondary-bg);
         display: flex;
         flex-direction: column;
@@ -425,10 +425,25 @@ header.scrolled {
         transition: var(--transition);
         z-index: 999;
         list-style: none;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
     }
 
     #nav-links.active {
         right: 0;
+    }
+
+    #nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+        border-radius: 8px;
+        transition: var(--transition);
+    }
+
+    #nav-links a:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--accent-light);
+        transform: scale(1.05);
     }
 
     /* FAQ Styles */
@@ -489,7 +504,8 @@ header.scrolled {
     }
 
     .header-actions .btn {
-        display: none; /* Hide primary CTA in header on very small screens to save space */
+        padding: 8px 15px;
+        font-size: 0.8rem;
     }
 
     .hero-content h1 {
