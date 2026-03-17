@@ -49,8 +49,38 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.faq-question').forEach(question => {
         question.addEventListener('click', () => {
             const item = question.parentElement;
-            item.classList.toggle('active');
+            // Close other open items
+            document.querySelectorAll('.faq-item.faq-open').forEach(openItem => {
+                if (openItem !== item) openItem.classList.remove('faq-open');
+            });
+            item.classList.toggle('faq-open');
+        });
+    });
+
+    // ===== Gist Tabs =====
+    document.querySelectorAll('.gist-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabId = tab.dataset.tab;
+            // Update active tab
+            document.querySelectorAll('.gist-tab').forEach(t => t.classList.remove('active-tab'));
+            tab.classList.add('active-tab');
+            // Update active panel
+            document.querySelectorAll('.gist-panel').forEach(p => p.classList.remove('active-panel'));
+            const panel = document.getElementById('panel-' + tabId);
+            if (panel) panel.classList.add('active-panel');
         });
     });
 });
 
+
+// Brochure Form Submit → WhatsApp redirect
+function handleBrochureSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById('brochure-name').value.trim();
+    const phone = document.getElementById('brochure-phone').value.trim();
+    const phoneNumber = '916385573505'; // Replace with your WhatsApp number
+    const message = encodeURIComponent(
+        `Hi Harsan Technologies! My name is ${name}. I'm interested in your Full Stack Development course. Please send me the course brochure. My phone number is ${phone}.`
+    );
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+}
